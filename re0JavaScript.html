@@ -2,9 +2,13 @@
     <head>
 	    <script>
 		    'use strict'; //在strict模式下运行的JavaScript代码，强制通过var申明变量，未使用var申明变量就使用的，将导致运行错误。
-			var a = 3;
-			var b = '3';
-			if(a==b)
+			//var a = 3;
+			//var b = '3';
+			//var nameZa = 'no way';
+			/**************************************************************
+			*由于JavaScript这个设计缺陷，不要使用==比较，始终坚持使用===比较。*
+			**************************************************************/
+			/*if(a==b)
 			{
 			    //第一种是==比较，它会自动转换数据类型再比较，很多时候，会得到非常诡异的结果；
 			    alert('a==b');
@@ -12,10 +16,46 @@
 			if(a===b)
 			{
 			    //第二种是===比较，它不会自动转换数据类型，如果数据类型不一致，返回false，如果一致，再比较。
-				alert('a===b'); 
-			}
-			//由于JavaScript这个设计缺陷，不要使用==比较，始终坚持使用===比较。
-	    </script>
+				alert(`a===b`); 
+			}*/
+
+           
+			/*alert(`a=
+			       ${a}
+				   b=
+				   ${b}`); 
+			
+			alert(`多行字符串?\n不是！${nameZa}`); 
+            */
+
+            //var strMessage = 'Hello World';
+			//alert(strMessage);
+			//alert(strMessage.toUpperCase());
+			//alert(strMessage.toLowerCase());
+
+            //Array
+            var arrName = ["wf","ff","zz"]
+		    //slice //数组的substring
+            var arrCopy = arrName.slice(); //
+            arrCopy.pop();
+		    arrCopy.push("ab","ccd");
+		    alert(arrCopy.pop()); //ccd
+		    //arrCopy [wf,ff,ab]
+		    arrCopy.unshift("11"); //arrCopy [11,wf,ff,ab]
+		    arrCopy.sort(); //11,ab,ff,wf
+		    arrCopy.shift();//ab,ff,wf
+		    arrCopy.reverse();//wf,ff,ab
+		    arrCopy.unshift("10010");  //10010,wf,ff,ab
+		    //splice()方法是修改Array的“万能方法”，它可以从指定的索引开始删除若干元素，然后再从该位置添加若干元素：
+		    arrCopy.splice(1,3,"App","ES6","10101"); //10010,App,ES6,10101
+		    alert(arrCopy.join('='));
+
+			//练习：如何通过索引取到500这个值：
+			var arr = [[1, 2, 3], [400, 500, 600], '-'];
+			var arrCon = arr.splice(1,1);
+			var index = arrCon.indexOf(500);
+			alert(index);
+ 	    </script>
 	</head>
     <body>
         <h1>Hello World</h1>
