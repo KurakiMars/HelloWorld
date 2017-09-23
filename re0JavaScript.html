@@ -1,7 +1,15 @@
 <html>
     <head>
+		<meta charset="utf-8" />
 	    <script>
 		    'use strict'; //在strict模式下运行的JavaScript代码，强制通过var申明变量，未使用var申明变量就使用的，将导致运行错误。
+			var MYAPP = {};
+
+			// 其他变量:
+			MYAPP.name = 'myapp';
+			MYAPP.version = 1.0;
+
+			const PI = 3.14;
 			//var a = 3;
 			//var b = '3';
 			//var nameZa = 'no way';
@@ -37,7 +45,7 @@
             var arrName = ["wf","ff","zz"]
 		    //slice //数组的substring
             var arrCopy = arrName.slice(); //
-            arrCopy.pop();
+            /* arrCopy.pop();
 		    arrCopy.push("ab","ccd");
 		    alert(arrCopy.pop()); //ccd
 		    //arrCopy [wf,ff,ab]
@@ -52,9 +60,237 @@
 
 			//练习：如何通过索引取到500这个值：
 			var arr = [[1, 2, 3], [400, 500, 600], '-'];
-			var arrCon = arr.splice(1,1);
-			var index = arrCon.indexOf(500);
-			alert(index);
+			alert(arr[1][1]);
+
+			arr.name = 'test';
+
+			//for ... in循环将把name包括在内，但Array的length属性却不包括在内。
+			alert('for in...');
+			for(var x in arr)
+			{
+				alert(x);
+			}
+
+			//for ... of循环则完全修复了这些问题，它只循环集合本身的元素：
+			alert('for of...');
+			for(var x of arr)
+			{
+				alert(x);
+			} */
+
+			// //Map And Set
+			// var a = ['A', 'B', 'C'];
+			// var set = new Set(['sA','sB','sC']);
+			// set.add('sD');
+
+			// var map = new Map();
+			// map.set('0','mA');
+			// map.set('1','mB');
+			// map.set('2','mC');
+			// map.set('3','mD');
+
+
+			// //iterable
+			// a.forEach(function (element, index, array) {
+			// 	// element: 指向当前元素的值
+			// 	// index: 指向当前索引
+			// 	// array: 指向Array对象本身
+			// 	// alert('element');
+			// 	// alert(element);
+			// 	// alert('index');
+			// 	// alert(index);
+			// 	// alert('array');
+			// 	// alert(array);
+			// });
+
+			// set.forEach(function(setValue)
+			// {
+			// 	alert('setValue='+setValue);
+			// });
+
+			// map.forEach(function(value,key){
+			// 	alert('key='+key);
+			// 	alert('value='+value);
+			// });
+
+			// var area = function (argWeight,argHeight)
+			// {
+			// 	var retArea = 0;
+			// 	retArea = argWeight * argHeight;
+			// 	return retArea;
+			// };
+			
+			//由于JavaScript允许传入任意个参数而不影响调用，因此传入的参数比定义的参数多也没有问题，虽然函数内部并不需要这些参数：
+			//alert('area='+area(2,3,3));
+
+			//传入的参数比定义的少也没有问题：
+			//alert('area='+area()); //返回NaN
+
+
+			//arguments它只在函数内部起作用，并且永远指向当前函数的调用者传入的所有参数。
+			// function foo(x) {
+			// 	alert(x); // 10
+			// 	for (var i=0; i<arguments.length; i++) {
+			// 		alert(arguments[i]); // 10, 20, 30
+			// 	}
+			// }
+			// foo(10, 20, 30);
+
+
+			//rest
+			/* function testRest(a,b,...rest)
+			{
+				alert('a = ' + a);
+				alert('b = ' + b);
+				alert('rest = '+rest);
+			}
+			testRest(1); */
+
+
+			/* function sum(...rest) {
+				var retSum = 0;
+				// rest.forEach(function(value)
+				// {
+				// 	retSum+= value;
+				// });
+				for(let i of rest)
+				{
+					retSum += i;
+				}
+				return retSum;
+			}
+
+			alert(sum(1,2,3,4,5));
+
+			///
+			function area_of_circle(r, pi) {
+				if(arguments.length<2)
+				{
+					pi = PI;
+				}
+				return pi*r*r;
+			}
+			 */
+			
+			//变量提升
+			/*function foo() {
+				var y = 'Bobi';
+				var x = 'Hello, ' + y;
+				alert(x);
+			}
+			foo(); */
+			
+
+			/* window.alert('调用window.alert()');
+			// 把alert保存到另一个变量:
+			var old_alert = window.alert;
+			// 给alert赋一个新函数:
+			window.alert = function () {};
+			alert('无法用alert()显示了!');
+			// 恢复alert:
+			window.alert = old_alert;
+			alert('又可以用alert()了!'); */
+
+			function getAge () {
+					var y = new Date().getFullYear();
+					return y - this.birth;
+				}
+			var xiaoming = {
+				name: '小明',
+				birth: 1990,
+				age: getAge
+			};
+
+			//装饰器
+			// 利用apply()，我们还可以动态改变函数的行为。
+			//call不可用？？？可以用
+			var count = 0;
+			var old_getAge = getAge;
+
+			window.getAge = function (){
+                count++;
+				return old_getAge.call(xiaoming);
+			}
+
+			//var age=xiaoming.age();
+			var ageApply = getAge.apply(xiaoming,[]);
+			var age = getAge.call(xiaoming);
+			// alert('age'+age);
+			// alert('count'+count);
+
+			/*
+			   高阶函数
+			   map/reduce 
+			*/
+			// function product(arr) {
+			// var retValue = arr.reduce(function(x,y)
+			// 	{
+			// 		return x*y;
+			// 	});
+			// return retValue;
+			// }
+
+			/* function string2int(s) {
+				let strArray = [];
+				for(let i =0 ;i<s.length;i++)
+				{
+					strArray[i] = s[i]-0;
+				}
+
+				//alert(strArray.length);
+				return strArray.reduce(function(x,y)
+				{
+					return x*10+y*1;
+				});
+				//strArray = s.map(Math.abs);
+			    // strArray = s.map(function (x){
+				//    return x-'0';
+				//    });
+			}
+
+			alert(string2int('12300')); */
+
+			function normalize(arr) {
+
+			    return arr.map(function(x)
+				{
+				   /* return x.reduce(function(a,b,idx)
+				   {
+					   if(idx===0)
+						{
+							return a.concat(b.toUpperCase());
+						}
+						else
+						{
+							return a.concat(b.toLowerCase());
+						}
+
+				   }); */
+				   let retString  = "";
+				   for(let i=0;i < x.length;i++)
+				   {
+					if(i===0)
+					   {
+						retString =retString.concat(x[i].toUpperCase());
+					   }
+					   else
+					   {
+						retString =retString.concat(x[i].toLowerCase());
+					   }
+				   }
+				   return retString
+				});
+			}
+
+			let norArr =  normalize(['adam', 'LISA', 'barT']);
+			var arr = ['1', '2', '3'];
+			var r;
+			//r = arr.map(parseInt()); err
+			r = arr.map(function(x){
+				return parseInt(x,10);
+			});
+			alert('[' + r[0] + ', ' + r[1] + ', ' + r[2] + ']');
+
  	    </script>
 	</head>
     <body>
