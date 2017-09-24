@@ -303,9 +303,8 @@
 				return fnSum;
 			}
 			
-			var f = fn([1,2,3]);
+			/* var f = fn([1,2,3]);
 			alert(f(1));
-
 			var fib = (max) =>{
 				var fnRet = function(){
 					var t =0;
@@ -329,7 +328,7 @@
 			var fn2 = fib(10);
 			var fn3 = fib(5);
 			alert(fn2());
-			alert(fn3());
+			alert(fn3()); */
 
 			//function fib(max){
 			/* var fib = (max) =>{
@@ -356,6 +355,58 @@
 			var f2 = fib(10);
 			alert(f2()); */
 			// alert(fib(10));
+
+
+			/*
+			* generator
+			*
+			*/
+			/* function* fib(max)
+			{
+				var t =0;
+				var a = 0;
+				var b = 1;
+				var n = 1;
+				while(n<max){
+					yield a;
+					t= a+b;
+					a= b;
+					b = t;
+					n++;
+				}
+				return a;
+			}
+
+			for(var x of fib(10))
+			{
+				alert(x);
+			} */
+
+			function* next_id() {
+				var a=0;
+				while(1==1)
+				{
+				a++;
+				yield a;
+				}
+			}
+
+			// 测试:
+			var
+				x,
+				pass = true,
+				g = next_id();
+			for (x = 1; x < 100; x ++) {
+				if (g.next().value !== x) {
+					pass = false;
+					alert('测试失败!');
+					break;
+				}
+			}
+			if (pass) {
+				alert('测试通过!');
+			}
+
  	    </script>
 	</head>
     <body>
