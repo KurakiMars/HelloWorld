@@ -1,1 +1,2 @@
 1.学习git用法
+2.学习javascript
