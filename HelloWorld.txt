@@ -1,3 +1,4 @@
 1.学习git用法
 2.学习javascript
 3.学习python
+4.设计模式、算法
