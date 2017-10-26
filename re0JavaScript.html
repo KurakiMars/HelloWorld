@@ -214,8 +214,15 @@
 				}
 			var xiaoming = {
 				name: '小明',
+				age: getAge,
 				birth: 1990,
-				age: getAge
+				toJSON:function(){
+					return{
+						'Name':this.name,
+						'Age':this.age(),
+						'BirthDay':this.birth
+					}
+				}
 			};
 
 			//装饰器
@@ -399,7 +406,7 @@
 				alert(x);
 			} */
 
-			function* next_id() {
+			/* function* next_id() {
 				var a=0;
 				while(1==1)
 				{
@@ -422,6 +429,92 @@
 			}
 			if (pass) {
 				alert('测试通过!');
+			} */
+
+
+			//标准格式- Date
+/* 			var now =new Date();
+			alert(now);
+			alert(new Date().getTime()); */
+
+			//JSON
+			//alert(JSON.stringify(xiaoming));
+
+			let yahooApiString = '{"query":{"count":1,"created":"2016-10-16T05:32:32Z","lang":"en-US","results":{"channel":{"units":{"distance":"mi","pressure":"in","speed":"mph","temperature":"F"},"title":"Yahoo! Weather - Beijing, Beijing, CN","link":"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2151330/","description":"Yahoo! Weather for Beijing, Beijing, CN","language":"en-us","lastBuildDate":"Sun, 16 Oct 2016 01:32 PM CST","ttl":"60","location":{"city":"Beijing","country":"China","region":" Beijing"},"wind":{"chill":"66","direction":"225","speed":"7"},"atmosphere":{"humidity":"65","pressure":"1013.0","rising":"0","visibility":"16.1"},"astronomy":{"sunrise":"6:27 am","sunset":"5:32 pm"},"image":{"title":"Yahoo! Weather","width":"142","height":"18","link":"http://weather.yahoo.com","url":"http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif"},"item":{"title":"Conditions for Beijing, Beijing, CN at 12:00 PM CST","lat":"39.90601","long":"116.387909","link":"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2151330/","pubDate":"Sun, 16 Oct 2016 12:00 PM CST","condition":{"code":"28","date":"Sun, 16 Oct 2016 12:00 PM CST","temp":"65","text":"Mostly Cloudy"},"forecast":[{"code":"28","date":"16 Oct 2016","day":"Sun","high":"68","low":"53","text":"Mostly Cloudy"},{"code":"32","date":"17 Oct 2016","day":"Mon","high":"68","low":"51","text":"Sunny"},{"code":"32","date":"18 Oct 2016","day":"Tue","high":"68","low":"48","text":"Sunny"},{"code":"34","date":"19 Oct 2016","day":"Wed","high":"72","low":"51","text":"Mostly Sunny"},{"code":"28","date":"20 Oct 2016","day":"Thu","high":"64","low":"56","text":"Mostly Cloudy"},{"code":"26","date":"21 Oct 2016","day":"Fri","high":"61","low":"56","text":"Cloudy"},{"code":"28","date":"22 Oct 2016","day":"Sat","high":"58","low":"51","text":"Mostly Cloudy"},{"code":"30","date":"23 Oct 2016","day":"Sun","high":"56","low":"43","text":"Partly Cloudy"},{"code":"28","date":"24 Oct 2016","day":"Mon","high":"57","low":"42","text":"Mostly Cloudy"},{"code":"30","date":"25 Oct 2016","day":"Tue","high":"59","low":"47","text":"Partly Cloudy"}],"description":"<![CDATA[<img src=\\"http://l.yimg.com/a/i/us/we/52/28.gif\\"/>\\n<BR />\\n<b>Current Conditions:</b>\\n<BR />Mostly Cloudy\\n<BR />\\n<BR />\\n<b>Forecast:</b>\\n<BR /> Sun - Mostly Cloudy. High: 68Low: 53\\n<BR /> Mon - Sunny. High: 68Low: 51\\n<BR /> Tue - Sunny. High: 68Low: 48\\n<BR /> Wed - Mostly Sunny. High: 72Low: 51\\n<BR /> Thu - Mostly Cloudy. High: 64Low: 56\\n<BR />\\n<BR />\\n<a href=\\"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2151330/\\">Full Forecast at Yahoo! Weather</a>\\n<BR />\\n<BR />\\n(provided by <a href=\\"http://www.weather.com\\" >The Weather Channel</a>)\\n<BR />\\n]]>","guid":{"isPermaLink":"false"}}}}}}';
+			let jsonStr = JSON.parse(yahooApiString);
+			// alert(JSON.stringify(jsonStr,null,'  '));
+
+			//按照约定，构造函数首字母应当大写，而普通函数首字母应当小写，这样，一些语法检查工具如jslint将可以帮你检测到漏写的new。
+			function Student(name)
+			{
+				this.name = name;
+			}
+			//如果我们通过new Student()创建了很多对象，这些对象的hello函数实际上只需要共享同一个函数就可以了，这样可以节省很多内存。
+			// 要让创建的对象共享一个hello函数，根据对象的属性查找原则，我们只要把hello函数移动到xiaohong这些对象共同的原型上就可以了，也就是Student.prototype：
+			Student.prototype.hello = function(){
+				return 'hello '+this.name;
+			}
+
+			var xiaohong = new Student('xiaoH');
+			alert(xiaohong.name);
+			alert(xiaohong.hello());
+
+
+/* var Duck = {
+				name:'duck',
+				fly:function(){
+					alert(this.name+' is flying');
+				}
+			}
+
+			function createDucks(name)
+			{
+				var s = Object.create(Duck);
+				s.name = name;
+				return s;
+			}
+
+			
+			if(nDuck.__proto__  === Duck)
+			{
+				alert(nDuck.name+'is Duck');
+			}
+******************************改造为构造函************************************ */
+			function Duck(props)
+			{
+				this.name = props.name;
+				this.age = props.age;
+				//this.fly = props.fly();
+			}
+
+			Duck.prototype.fly = function(){
+				alert(this.name+' is flying'); 
+			}
+
+			function createDuck(props)
+			{
+				return new Duck(props||{});
+			}
+
+			var gagaDuck = createDuck(
+				{
+					name:'gagaDuck',
+					age:2
+				}
+			);
+
+			var kuekueDuck = createDuck(
+				{
+					name:'kuekueDuck',
+					age:3
+				}
+			);
+
+			gagaDuck.fly();
+			kuekueDuck.fly();
+			if(typeof gagaDuck.fly === 'function' && gagaDuck.fly === kuekueDuck.fly)
+			{
+				alert('Yes Done!!');
 			}
 
  	    </script>
